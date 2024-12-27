@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GestionCommandes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-teal-900 w-64 h-full shadow-lg fixed lg:static transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50" id="sidebar">
+        <div class="p-4 border-b">
+            <h1 class="text-xl font-bold text-white">GestionCommandes</h1>
+        </div>
+        <nav class="mt-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="@Url.Action("Index", "Produit")"
+                        class="flex items-center p-3 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 11c0-2.828-2.686-5-6-5a6 6 0 000 12c3.314 0 6-2.172 6-5z" />
+                        </svg>
+                        Produits
+                    </a>
+                </li>
+                @if (!User.IsInRole("CLIENT")){
+                    <li>
+                        <a href="@Url.Action("Index", "Livreur")"
+                            class="flex items-center p-3 text-white hover:bg-gray-100 hover:text-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 11c0-2.828-2.686-5-6-5a6 6 0 000 12c3.314 0 6-2.172 6-5z" />
+                            </svg>
+                            Livreurs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Client")"
+                            class="flex items-center p-3 text-white hover:bg-gray-100 hover:text-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 11c0-2.828-2.686-5-6-5a6 6 0 000 12c3.314 0 6-2.172 6-5z" />
+                            </svg>
+                            Clients
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a href="@Url.Action("Index", "Commande")"
+                        class="flex items-center p-3 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 11c0-2.828-2.686-5-6-5a6 6 0 000 12c3.314 0 6-2.172 6-5z" />
+                        </svg>
+                        Mes Commandes
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Login", "Connexion")"
+                        class="flex items-center p-3 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                        </svg>
+                        Déconnexion
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b shadow-sm p-4 flex items-center justify-between">
+            <!-- Barre de recherche -->
+            <div class="flex-1 mr-4">
+                <form method="get" class="flex">
+                    <input type="text" placeholder="Rechercher..." class="w-1/2 p-1 text-sm border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-teal-500" />
+                    <button type="submit" class="bg-teal-900 text-white px-2 py-1 rounded-r-lg hover:bg-teal-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 10-14 0 7 7 0 0014 0z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Utilisateur connecté -->
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-800 font-medium"></span>
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="h-10 w-10 rounded-full border border-gray-300">
+            </div>
+        </header>
+
+        <main class="p-6 bg-white flex-1 overflow-y-auto">
+            @RenderBody()
+        </main>
+
+        <footer class="border-t bg-white text-gray-600 py-4 text-center">
+            &copy; 2024 - GestionCommandes - <a class="text-blue-600 hover:underline" asp-area="" asp-controller="Home"
+                asp-action="Privacy">Privacy</a>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript pour rendre la sidebar rétractable
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+        }
+    </script>
+</body>
+
+</html>

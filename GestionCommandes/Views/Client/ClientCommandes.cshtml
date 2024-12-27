@@ -1,0 +1,34 @@
+@model IEnumerable<GestionCommandes.Models.Commande>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Commandes du Client</title>
+</head>
+<body>
+    <h1 class="text-4xl underline font-bold text-gray-800 text-center">Commandes du Client</h1>
+
+    <table class="table-auto border-collapse border border-black w-full text-left rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-teal-700 text-white">
+                <th class="border border-black px-4 py-2">Date</th>
+                <th class="border border-black px-4 py-2">Montant</th>
+                <th class="border border-black px-4 py-2">Livreur</th>
+                <th class="border border-black px-4 py-2">Etat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var commande in Model)
+            {
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">@commande.DateCom</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.Montant</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.livreur.Nom</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.EtatCom</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

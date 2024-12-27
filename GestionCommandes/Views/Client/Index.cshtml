@@ -1,0 +1,63 @@
+@model IEnumerable<GestionCommandes.Models.Client>
+
+@{
+    ViewData["Title"] = "Liste des Clients";
+}
+
+<div class="container mx-auto px-4 py-3">
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-4xl underline font-bold text-gray-800 w-full text-center">Liste des Clients</h1>
+    </div>
+
+    <div class="mb-4 flex justify-between items-center">
+        <form method="get" class="flex w-1/2">
+            <input type="text" placeholder="Rechercher..." class="w-full p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-teal-500" />
+            <button type="submit" class="bg-teal-600 text-white px-4 rounded-r-lg hover:bg-teal-700 transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 10-14 0 7 7 0 0014 0z" />
+                </svg>
+            </button>
+        </form>
+
+        @* <a href="@Url.Action("Create", "Client")"
+        class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition duration-200">
+            Ajouter
+        </a> *@
+    </div>
+
+    <table class="w-full bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
+        <thead class="bg-teal-700 text-white text-center">
+            <tr>
+                <th class="p-4 border-black px-4 py-2">Nom</th>
+                <th class="p-4 border-black px-4 py-2">Prénom</th>
+                <th class="p-4 border-black px-4 py-2">Adresse</th>
+                <th class="p-4 border-black px-4 py-2">Téléphone</th>
+                @* <th class="p-4 border-black px-4 py-2">Actions</th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5" class="text-center p-4 text-gray-500">Aucun client trouvé.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var client in Model)
+                {
+                    <tr class="border-b hover:bg-gray-100 text-center">
+                        <td class="border border-gray-300 px-4 py-2">@client.User.Nom</td>
+                        <td class="border border-gray-300 px-4 py-2">@client.User.Prenom</td>
+                        <td class="border border-gray-300 px-4 py-2">@client.Adresse</td>
+                        <td class="border border-gray-300 px-4 py-2">@client.User.Telephone</td>
+                        @* <td class="border border-gray-300 px-4 py-2">
+                            <a href="@Url.Action("Details", "Client", new { id = client.Id })"
+                               class="text-blue-600 hover:underline">Détails</a>
+                        </td> *@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

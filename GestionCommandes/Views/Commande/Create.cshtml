@@ -1,0 +1,40 @@
+@model GestionCommandes.Models.Commande
+
+@{
+    Layout = null;
+}
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="DateCom"></label>
+        <input asp-for="DateCom" class="form-control" />
+        <span asp-validation-for="DateCom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Montant"></label>
+        <input asp-for="Montant" class="form-control" />
+        <span asp-validation-for="Montant" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClientId"></label>
+        <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId"></select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LivreurId"></label>
+        <select asp-for="LivreurId" class="form-control" asp-items="ViewBag.LivreurId"></select>
+        <span asp-validation-for="LivreurId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EtatCom"></label>
+        <select asp-for="EtatCom" class="form-control">
+            <option value="ATTENTE">ATTENTE</option>
+            <option value="NONLIVRE">NON LIVRÉ</option>
+            <option value="LIVRE">LIVRÉ</option>
+            <option value="PAYE">PAYÉ</option>
+            <option value="IMPAYE">IMPAYÉ</option>
+        </select>
+        <span asp-validation-for="EtatCom" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Créer</button>
+</form>

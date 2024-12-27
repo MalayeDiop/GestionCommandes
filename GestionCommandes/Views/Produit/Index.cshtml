@@ -1,0 +1,61 @@
+@model IEnumerable<GestionCommandes.Models.Produit>
+
+@* @{
+    ViewData["Title"] = "Liste des Produits";
+} *@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-4xl underline font-bold text-gray-800 w-full text-center">Liste des Produits</h1>
+    </div>
+
+    <div class="mb-4 flex justify-between items-center">
+        <form method="get" class="flex w-1/2">
+            <input type="text" placeholder="Rechercher..." class="w-full p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-teal-500" />
+            <button type="submit" class="bg-teal-600 text-white px-4 rounded-r-lg hover:bg-teal-700 transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 10-14 0 7 7 0 0014 0z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <form method="post" action="@Url.Action("Index", "Produit")">
+        <table class="table-auto border-collapse border border-black w-full text-left rounded-lg overflow-hidden text-center">
+            <thead>
+                <tr class="bg-teal-700 text-white">
+                    <th class="border border-black px-4 py-2">Libellé</th>
+                    <th class="border border-black px-4 py-2">Prix Unitaire</th>
+                    <th class="border border-black px-4 py-2">Quantité en Stock</th>
+                    <th class="border border-black px-4 py-2">Quantité Commandée</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produit in Model)
+                {
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">@produit.Libelle</td>
+                        <td class="border border-gray-300 px-4 py-2">@produit.PrixUnitaire</td>
+                        <td class="border border-gray-300 px-4 py-2">@produit.QteStock</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <input type="number" name="Quantites[@produit.Id]" min="1" max="@produit.QteStock" class="border border-gray-300 px-2 py-1 w-full" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="mt-4 flex justify-end">
+            <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition duration-200">
+                Passer la commande
+            </button>
+        </div>
+    </form>
+
+</body>
+</html>

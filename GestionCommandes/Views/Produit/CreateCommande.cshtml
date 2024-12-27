@@ -1,0 +1,50 @@
+@model IEnumerable<GestionCommandes.Models.Produit>
+
+@* @{
+    ViewData["Title"] = "Créer une Commande";
+} *@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Créer une Commande</title>
+</head>
+<body>
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-4xl underline font-bold text-gray-800 w-full text-center">Créer une Commande</h1>
+    </div>
+
+    <form method="post" action="@Url.Action("CreateCommande", "Commande")">
+        <table class="table-auto border-collapse border border-black w-full text-left rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-teal-700 text-white">
+                    <th class="border border-black px-4 py-2">Libellé</th>
+                    <th class="border border-black px-4 py-2">Prix Unitaire</th>
+                    <th class="border border-black px-4 py-2">Quantité en Stock</th>
+                    <th class="border border-black px-4 py-2">Quantité Commandée</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produit in Model)
+                {
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">@produit.Libelle</td>
+                        <td class="border border-gray-300 px-4 py-2">@produit.PrixUnitaire</td>
+                        <td class="border border-gray-300 px-4 py-2">@produit.QteStock</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <input type="number" name="Quantites[@produit.Id]" min="1" max="@produit.QteStock" class="border border-gray-300 px-2 py-1 w-full" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="mt-4 flex justify-end">
+            <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition duration-200">
+                Passer la commande
+            </button>
+        </div>
+    </form>
+
+</body>
+</html>

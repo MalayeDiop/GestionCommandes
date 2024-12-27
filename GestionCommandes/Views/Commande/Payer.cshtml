@@ -1,0 +1,44 @@
+@model GestionCommandes.Models.Commande
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paiement</title>
+</head>
+<body>
+    <div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif;">
+        <h1 style="text-align: center; color: teal;">Paiement de la Commande</h1>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <tr>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Client</th>
+                <td style="border: 1px solid black; padding: 10px;">@Model.ClientId</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">Montant Total</th>
+                <td style="border: 1px solid black; padding: 10px;">@Model.Montant</td>
+            </tr>
+            <tr>
+                <th style="border: 1px solid black; padding: 10px; text-align: left;">État</th>
+                <td style="border: 1px solid black; padding: 10px;">@Model.EtatCom</td>
+            </tr>
+        </table>
+
+        <form method="post" action="@Url.Action("Index", "Commande", new { id = Model.Id })">
+            <label for="montant">Montant à Payer :</label>
+            <input type="number" id="montant" name="montant" min="1" max="@Model.Montant" required style="margin-bottom: 10px; padding: 5px; width: 100%;">
+
+            <label for="servicePaiement">Service de Paiement :</label>
+            <select id="servicePaiement" name="servicePaiement" required style="margin-bottom: 20px; padding: 5px; width: 100%;">
+                <option value="WAVE">WAVE</option>
+                <option value="OM">Orange Money</option>
+                <option value="CHEQUE">Chèque</option>
+            </select>
+
+            <button type="submit" style="background-color: teal; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%;">
+                Effectuer le Paiement
+            </button>
+        </form>
+    </div>
+</body>
+</html>

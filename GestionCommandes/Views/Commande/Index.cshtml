@@ -1,0 +1,51 @@
+@model IEnumerable<GestionCommandes.Models.Commande>
+
+@{
+    ViewData["Title"] = "Liste des Commandes";
+}
+
+<div class="container mx-auto px-4 py-3">
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-4xl underline font-bold text-gray-800 w-full text-center">Liste des Commandes</h1>
+    </div>
+
+    <table class="table-auto border-collapse border border-black w-full text-left rounded-lg overflow-hidden text-center">
+        <thead>
+            <tr class="bg-teal-700 text-white">
+                <th class="border border-black px-4 py-2">ID</th>
+                <th class="border border-black px-4 py-2">Date Commande</th>
+                <th class="border border-black px-4 py-2">Montant</th>
+
+                <th class="border border-black px-4 py-2">Etat</th>
+                <th class="border border-black px-4 py-2">Paiement</th>
+                <th class="border border-black px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var commande in Model)
+            {
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">@commande.Id</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.DateCom.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.Montant</td>
+                    <td class="border border-gray-300 px-4 py-2">@commande.EtatCom</td>
+                    <td>
+                        @if (0 < commande.Montant)
+                        {
+                            <a href="@Url.Action("Payer", "Commande", new { id = commande.Id })" style="color: teal; text-decoration: underline;">
+                                Payer
+                            </a>
+                        }
+                        else
+                        {
+                            <span style="color: teal;">Payée</span>
+                        }
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a href="@Url.Action("Details", "Commande", new { id = commande.Id })" class="text-blue-500">Détails</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

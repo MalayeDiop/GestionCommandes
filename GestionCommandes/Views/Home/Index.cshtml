@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl text-center font-bold underline text-teal-700 mb-6">
+        Tableau de Bord
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Commandes du Jour -->
+        <div class="bg-teal-700 shadow-lg rounded-lg p-6 text-center">
+            <h2 class="text-xl font-semibold text-white">Commandes du Jour</h2>
+            <p class="mt-4 text-5xl mb-4 font-bold text-white">12</p>
+            <p class="text-white">Commandes passées aujourd'hui.</p>
+        </div>
+
+        <!-- Livraisons du Jour -->
+        <div class="bg-teal-700 shadow-lg rounded-lg p-6 text-center">
+            <h2 class="text-xl font-semibold text-white">Livraisons du Jour</h2>
+            <p class="mt-4 text-5xl mb-4 font-bold text-white">8</p>
+            <p class="text-white">Livraisons effectuées aujourd'hui.</p>
+        </div>
+
+        <!-- Paiements du Jour -->
+        <div class="bg-teal-700 shadow-lg rounded-lg p-6 text-center">
+            <h2 class="text-xl font-semibold text-white">Paiements du Jour</h2>
+            <p class="mt-4 text-5xl mb-4 font-bold text-white">10</p>
+            <p class="text-white">Paiements réalisés aujourd'hui.</p>
+        </div>
+
+        <!-- Commandes mises en attente -->
+        <div class="bg-teal-700 shadow-lg rounded-lg p-6 text-center">
+            <h2 class="text-xl font-semibold text-white">Commandes en Attente</h2>
+            <p class="mt-4 text-5xl mb-4 font-bold text-white">5</p>
+            <p class="text-white">Commandes en attente de traitement.</p>
+        </div>
+    </div>
+</div>

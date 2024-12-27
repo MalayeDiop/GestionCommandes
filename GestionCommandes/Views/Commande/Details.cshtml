@@ -1,0 +1,53 @@
+@model GestionCommandes.Models.Commande
+
+@{
+    ViewData["Title"] = "Détails de la Commande";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Détails de la Commande</title>
+</head>
+<body>
+    <div class="container mx-auto">
+        <h1 class="text-4xl underline font-bold text-gray-800 text-center">Détails de la Commande</h1>
+
+        <table class="table-auto border-collapse border border-black w-full text-left rounded-lg overflow-hidden mt-4">
+            <thead>
+                <tr class="bg-teal-700 text-white">
+                    <th class="border border-black px-4 py-2">Produit</th>
+                    <th class="border border-black px-4 py-2">Quantité Commandée</th>
+                    <th class="border border-black px-4 py-2">Prix Unitaire</th>
+                    <th class="border border-black px-4 py-2">Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.DetailsCommande != null)
+                {
+                    @foreach (var detail in Model.DetailsCommande)
+                    {
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">@detail.Produit?.Libelle</td>
+                            <td class="border border-gray-300 px-4 py-2">@detail.QteCom</td>
+                            <td class="border border-gray-300 px-4 py-2">@detail.Produit?.PrixUnitaire</td>
+                            <td class="border border-gray-300 px-4 py-2">@detail.Produit?.PrixUnitaire</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="border border-gray-300 px-4 py-2 text-center">Aucun détail disponible</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="mt-4">
+            <h2 class="text-2xl font-bold">Montant Total : @Model.Montant</h2>
+            <h2 class="text-2xl font-bold">État : @Model.EtatCom</h2>
+        </div>
+    </div>
+</body>
+</html>
